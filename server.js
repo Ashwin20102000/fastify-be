@@ -1,0 +1,50 @@
+const fastify = require('fastify')({logger:true})
+const port = 8000
+fastify.register(require('fastify-cors'),{
+    origin:'*'
+})
+let customer = []
+let manager = [{id:1,"name":"Manohar"}]
+let managerMessage = []
+let customerMessage = []
+fastify.get('/',async(req,res)=>{
+    return { serverDate :new Date() }
+})
+
+fastify.get('/customer',async(req,res)=>{
+    return {customer}
+})
+
+fastify.post('/customer',async(req,res)=>{
+    let cust = customer.push(req.body.customer)
+    return {cust}
+})
+fastify.get('/manager',async(req,res)=>{
+    return {manager}
+})
+
+fastify.post('/manager',async(req,res)=>{
+    let managers = manager.push(req.body.manager)
+    return {managers}
+})
+
+
+
+fastify.get('/managermessage',async(req,res)=>{
+    return {managerMessage}
+})
+
+fastify.post('/managermessage',async(req,res)=>{
+    let managersmess = managerMessage.push(req.body.managermessage)
+    return {managersmess}
+})
+const start = async()=>{
+    try{
+        await fastify.listen(port)
+    }
+    catch(error){
+        fastify.log.error(error)
+        process.exit(1)
+    }
+}
+start()
