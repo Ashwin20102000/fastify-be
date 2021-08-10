@@ -41,8 +41,8 @@ fastify.post('/managermessage',async(req,res)=>{
 })
 const start = async()=>{
     try{
-//         await fastify.listen(process.env.PORT||port, "0.0.0.0")
-        await fastify.listen(port)
+        await fastify.listen(process.env.PORT||port, "0.0.0.0")
+       
     }
     catch(error){
         fastify.log.error(error)
